@@ -1,0 +1,123 @@
+<br>
+<div class="container">
+    <div class="card bg-light">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4 class="card-title mt-3 text-center">Add Student</h4>
+            <form [formGroup]="studentForm" (ngSubmit)="addStudent()">
+                <div class="form-group input-group">
+                    <input name="" class="form-control" formControlName="name" placeholder="Name" type="text">
+                </div>
+                <div class="form-group input-group">
+                    <input name="" class="form-control" formControlName="email" placeholder="Email" type="text">
+                </div>
+                <div class="form-group input-group">
+                    <input name="" class="form-control" formControlName="mobile" placeholder="Mobile" type="text">
+                </div>
+                <div class="form-group input-group">
+                    <p-multiSelect [options]="classrooms" formControlName="classroomIds" optionLabel="label"
+                        optionValue="id" placeholder="Select Classroom"></p-multiSelect>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Add</button>
+                </div>
+            </form>
+        </article>
+    </div>
+    <br>
+    <div class="card bg-light">
+        <article class="card-body">
+            <h4 class="card-title mt-3 text-center">Added Students</h4>
+            <p-table [value]="students" styleClass="p-datatable-gridlines" [paginator]="true" [rows]="10"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [rowsPerPageOptions]="[10,25,50]">
+                <ng-template pTemplate="header">
+                    <tr style="text-align: center;">
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-student>
+                    <tr>
+                        <td>{{student.name}}</td>
+                        <td>{{student.email}}</td>
+                        <td>{{student.mobile}}</td>
+                        <td>
+
+                            <button pButton pRipple type="button" icon="pi pi-eye"
+                                (click)="displayStudentDetails(student)"
+                                class="p-button-rounded p-button-text"></button>
+                            <button pButton pRipple type="button" icon="pi pi-pencil" (click)="showDialog(student)"
+                                class="p-button-rounded p-button-text"></button>
+                            <button pButton pRipple type="button" icon="pi pi-trash" (click)="deleteStudent(student.id)"
+                                class="p-button-rounded p-button-text"></button>
+
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </article>
+    </div>
+    <div class="card bg-light">
+        <p-dialog [(visible)]="showStudentDetails" [modal]="true" [style]="{width: '80vw'}">
+            <ng-template pTemplate="header">
+                <h4 class="card-title mt-3 text-center">Student Details</h4>
+            </ng-template>
+            <div class="row">
+                <div class="col">
+                  <p><b>Name:</b> {{studentDetails?.name}}</p>
+                </div>
+                <div class="col">
+                  <p><b>Email:</b> {{studentDetails?.email}}</p>
+                </div>
+                <div class="col">
+                    <p><b>Mobile:</b> {{studentDetails?.mobile}}</p>
+                  </div>
+              </div>
+              <h5 class="card-title mt-3">Student Classrooms</h5>
+              <p-table [value]="studentClassrooms" styleClass="p-datatable-gridlines">
+                <ng-template pTemplate="header">
+                    <tr style="text-align: center;">
+                        <th>Room</th>
+                        <th>Building</th>
+                        <th>Subject</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-studentClassroom>
+                    <tr>
+                        <td>{{studentClassroom.room}}</td>
+                        <td>{{studentClassroom.building}}</td>
+                        <td>{{studentClassroom.subject}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <ng-template pTemplate="footer">
+                <button type="submit" (click)="closeStudentDetails()" class="btn btn-primary btn-block">Close</button>
+            </ng-template>
+        </p-dialog>
+    </div>
+    <div class="card bg-light">
+        <p-dialog [(visible)]="display" [modal]="true" [style]="{width: '40vw'}">
+            <ng-template pTemplate="header">
+                <h4 class="card-title mt-3 text-center">Edit Student Info</h4>
+            </ng-template>
+            <form [formGroup]="updateStudentForm">
+                <div class="form-group input-group">
+                    <input name="" class="form-control" formControlName="name" placeholder="Name" type="text">
+                </div>
+                <div class="form-group input-group">
+                    <input name="" class="form-control" formControlName="email" placeholder="Email" type="text">
+                </div>
+                <div class="form-group input-group">
+                    <input name="" class="form-control" formControlName="mobile" placeholder="Mobile" type="text">
+                </div>
+            </form>
+            <ng-template pTemplate="footer">
+                <button type="submit" (click)="updateStudent()" class="btn btn-primary btn-block">Update</button>
+            </ng-template>
+        </p-dialog>
+    </div>
+</div>
+<br><br><br><br>
