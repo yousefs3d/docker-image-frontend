@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 const CLASSROOM_URL: string = '/api/school/class';
 const ALL_CLASSROOMS_URL: string = '/all';
 const ADD_CLASSROOM_URL: string = '/add';
-const UPDATE_CLASSROOM_URL: string = '/update';
+const UPDATE_CLASSROOM_URL: string = '/update/';
 const DELETE_CLASSROOM_URL: string = '/delete/';
 
 
@@ -28,8 +28,8 @@ export class ClassroomService {
     return this.http.post(`${this.apiServerUrl}`+CLASSROOM_URL + ADD_CLASSROOM_URL, classroomVM)
   }
 
-  public updateClassroom(classroomVM: any): Observable<any>{
-    return this.http.put(`${this.apiServerUrl}`+CLASSROOM_URL + UPDATE_CLASSROOM_URL, classroomVM)
+  public updateClassroom(id: number, classroomVM: any): Observable<any>{
+    return this.http.put(`${this.apiServerUrl}`+CLASSROOM_URL + UPDATE_CLASSROOM_URL + id, classroomVM)
   }
 
   public deleteClassroom(id: number): Observable<any>{

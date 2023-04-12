@@ -7,7 +7,7 @@ const STUDENT_URL: string = '/api/school/student';
 const ALL_STUDENTS_URL: string = '/all';
 const STUDENT_CLASSROOMS_URL: string = '/classrooms/';
 const ADD_STUDENT_URL: string = '/add';
-const UPDATE_STUDENT_URL: string = '/update';
+const UPDATE_STUDENT_URL: string = '/update/';
 const DELETE_STUDENT_URL: string = '/delete/';
 
 @Injectable({
@@ -30,8 +30,8 @@ export class StudentService {
     return this.http.post(`${this.apiServerUrl}`+STUDENT_URL + ADD_STUDENT_URL, studentVM)
   }
 
-  public updateStudent(studentVM: any): Observable<any>{
-    return this.http.put(`${this.apiServerUrl}`+STUDENT_URL + UPDATE_STUDENT_URL, studentVM)
+  public updateStudent(id: number, studentVM: any): Observable<any>{
+    return this.http.put(`${this.apiServerUrl}`+STUDENT_URL + UPDATE_STUDENT_URL + id, studentVM)
   }
 
   public deleteStudent(id: number): Observable<any>{

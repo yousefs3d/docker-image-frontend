@@ -91,7 +91,8 @@ export class StudentComponent implements OnInit {
   }
 
   updateStudent(): void {
-    this.studentService.updateStudent(this.updateStudentForm?.value).subscribe(res => {
+    let id = this.getUpdateStudentFormControl(this.ID).value;
+    this.studentService.updateStudent(id, this.updateStudentForm?.value).subscribe(res => {
       this.getAllStudents();
       this.display = false;
     })

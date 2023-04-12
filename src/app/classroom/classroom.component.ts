@@ -66,7 +66,8 @@ export class ClassroomComponent implements OnInit {
   }
 
   updateClassroom(): void{
-    this.classroomService.updateClassroom(this.updateClassroomForm?.value).subscribe(res =>{
+    let id = this.getUpdateClassroomFormControl(this.ID).value;
+    this.classroomService.updateClassroom(id, this.updateClassroomForm?.value).subscribe(res =>{
       this.getAllClassrooms();
       this.display = false;
     })
